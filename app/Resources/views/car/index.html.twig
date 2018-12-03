@@ -48,6 +48,7 @@
                 <a href="{{ path('car_new') }}">Create a new car</a>
             </li>
         </ul>
+
         {% for car in cars %}
             <tr>
                 <td><a href="{{ path('car_show', { 'id': car.id }) }}">{{ car.id }}</a></td>

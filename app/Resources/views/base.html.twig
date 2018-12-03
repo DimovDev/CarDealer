@@ -27,6 +27,7 @@
             tr:nth-child(even) {
                 background-color: #dddddd;
             }
+
         </style>
 
     {% endblock %}
@@ -88,7 +89,15 @@
         </div>
     </header>
 {% endblock %}
-{% block body %}{% endblock %}
+{% block body %}
+    <style>
+    body {
+    background-image: url("http://www.edinphoto.org.uk/0_street_r/0_street_views_-_seafield_road_east_bmw_080368_1536.jpg");
+        background-repeat: no-repeat;
+        background-size:100%;
+    }
+    </style>
+{% endblock %}
 {% block javascripts %}{% endblock %}
 
 </html>
