@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# total items count #}
+{#<div class="count">#}
+    {#{{ cars.getTotalItemCount }}#}
+{#</div>#}
+{#<table>#}
+    {#<tr>#}
+        {# sorting of properties based on query components #}
+        {#<th>{{ knp_pagination_sortable(cars, 'Id', 'a.id') }}</th>#}
+        {#<th{% if cars.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(cars, 'Title', 'a.title') }}</th>#}
+        {#<th>{{ knp_pagination_sortable(cars, 'Release', ['a.date', 'a.time']) }}</th>#}
+    {#</tr>#}
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+    <h1>Cars list</h1>
+
+    <table border="1" style="width:100%">
+        <thead >
+            <tr >
+                <th>Id</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Travelleddistance</th>
+                <th>Parts</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <ul>
+            <li>
+                <a href="{{ path('car_new') }}">Create a new car</a>
+            </li>
+        </ul>
+        {% for car in cars %}
+            <tr>
+                <td><a href="{{ path('car_show', { 'id': car.id }) }}">{{ car.id }}</a></td>
+                <td>{{ car.make }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.travelledDistance }}</td>
+                <td>{{ car.parts|join ('///') }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('car_show', { 'id': car.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('car_edit', { 'id': car.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation text-center" >
+        {{ knp_pagination_render(cars) }}
+    </div>
+
+{% endblock %}
