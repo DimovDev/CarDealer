@@ -10,4 +10,20 @@ namespace AppBundle\Repository;
  */
 class CarRepository extends \Doctrine\ORM\EntityRepository
 {
+	/**
+	 *
+	 * @return array
+	 */
+	public function sortCartByMake(): array
+	{
+		$qb = $this->createQueryBuilder('c');
+		$qb->orderBy('c.model', 'ASC');
+		$qb->select('c')
+			->addOrderBy('c.travelledDistance', 'DESC');
+		return $qb
+			->getQuery()
+			->getResult();
+
+
+	}
 }

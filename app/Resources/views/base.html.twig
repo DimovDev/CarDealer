@@ -91,12 +91,21 @@
 {% endblock %}
 {% block body %}
     <style>
-    body {
-    background-image: url("http://www.edinphoto.org.uk/0_street_r/0_street_views_-_seafield_road_east_bmw_080368_1536.jpg");
-        background-repeat: no-repeat;
-        background-size:100%;
-    }
+        body {
+            background-image: url("http://www.edinphoto.org.uk/0_street_r/0_street_views_-_seafield_road_east_bmw_080368_1536.jpg");
+            background-repeat: no-repeat;
+            background-size: 100%;
+
+
+        }
     </style>
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('customer_sort') }}">#}
+                {#Customer sort#}
+            {#</a>#}
+        {#</li>#}
+    {#</ul>#}
 {% endblock %}
 {% block javascripts %}{% endblock %}
 

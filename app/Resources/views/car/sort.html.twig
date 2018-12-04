@@ -1,21 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h1>Cars list sorted by Make</h1>
 
-    <h1>Cars list</h1>
-    <a href="{{ path('car_sort') }}">
-        Go to Car sorted by Make
-    </a>
-    <table>
+    <table border="1" style="width:100%">
         <thead >
-            <tr >
-                <th>Id</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Travelleddistance</th>
-                <th>Parts</th>
-                <th>Actions</th>
-            </tr>
+        <tr >
+            <th>Id</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Travelleddistance</th>
+            <th>Parts</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
 
@@ -26,7 +23,7 @@
                 <td>{{ car.make }}</td>
                 <td>{{ car.model }}</td>
                 <td>{{ car.travelledDistance }}</td>
-                <td>{{ car.parts|join (',,,') }}</td>
+                {#<td>{{ car.parts|join (',,,') }}</td>#}
 
                 <td>
                     <ul>
@@ -48,3 +45,4 @@
     </div>
 
 {% endblock %}
+

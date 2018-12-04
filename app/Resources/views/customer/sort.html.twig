@@ -1,19 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Customers list</h1>
-    <a href="{{ path('customer_sort') }}">
-       Go to Customer sort
-    </a>
+    <h1>Customers sorted list</h1>
+    {#FORM#}
+    <form method="post">
+        <input type="hidden" name="ageOrder" value="{{ ageOrder }}">
+        <button type="submit" class="btn btn-secondary">Toggle age order</button>
+    </form>
+    <br>
     <table border="1">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Birthdate</th>
-                <th>Isyoungdriver</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Birthdate</th>
+            <th>Isyoungdriver</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for customer in customers %}
@@ -43,3 +46,4 @@
         </li>
     </ul>
 {% endblock %}
+

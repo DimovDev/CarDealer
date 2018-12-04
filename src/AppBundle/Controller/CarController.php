@@ -25,7 +25,7 @@ class CarController extends Controller
 	 * @param Request $request
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function indexAction(Request $request)
+	public function indexAction(Request $request): \Symfony\Component\HttpFoundation\Response
 	{
 		$em = $this->getDoctrine()->getManager();
 
@@ -43,6 +43,34 @@ class CarController extends Controller
 		);
 
 		return $this->render('car/index.html.twig', array(
+			'cars' => $result));
+	}
+	/**
+	 * Lists all car entities sorted by criteria.
+	 *
+	 * @Route("/sort", name="car_sort",methods={"GET"})
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function findByCriteria(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$cars = $em->getRepository(Car::class)->
+		sortCartByMake();
+
+		/**
+		 * @ var $paginator\Knp\Component\Pager\Paginator
+		 */
+		$paginator = $this->get('knp_paginator');
+
+		$result = $paginator->paginate(
+			$cars,
+			$request->query->getInt('page', 1),
+			$request->query->getInt('limit', 10)
+		);
+
+		return $this->render('car/sort.html.twig', array(
 			'cars' => $result));
 	}
 

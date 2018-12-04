@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+
 /**
  * CustomerRepository
  *
@@ -10,4 +11,28 @@ namespace AppBundle\Repository;
  */
 class CustomerRepository extends \Doctrine\ORM\EntityRepository
 {
+	/**
+	 * @param string $criteria
+	 * @return array
+	 */
+	public function sortCustomerByBirthDate(string $criteria): array
+	{
+		$qb = $this->createQueryBuilder('c');
+		if ($criteria === 'DESC') {
+
+			$qb->orderBy('c.birthDate', 'DESC');
+		} else {
+			$qb->orderBy('c.birthDate', 'ASC');
+		}
+
+		$qb->select('c')
+			->addOrderBy('c.isYoungDriver', 'ASC');
+		return $qb
+			->getQuery()
+			->getResult();
+
+
+
+
+	}
 }
