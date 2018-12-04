@@ -132,6 +132,7 @@ class Supplier
 	{
 		$name = $this->name;
 		$importer = $this->isImporter?'Importer':'Local';
-		return "$name ($importer)";
+		$part=$this->parts;
+		return "$name ($importer)$part";
 	}
 }

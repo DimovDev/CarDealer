@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}CAR DEALER!{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -10,7 +11,7 @@
               integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
               crossorigin="anonymous">
         {#<script src="{{ asset('./js/jquery-3.3.1.min.js') }}"></script>#}
-        <style>
+        <style >
             table {
                 border: 1px;
                 font-family: arial, sans-serif;
@@ -108,5 +109,21 @@
     {#</ul>#}
 {% endblock %}
 {% block javascripts %}{% endblock %}
+{% block footer %}
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #5eb5e0;
+            color: white;
+            text-align: center;
+        }
+    </style>
+    <div class="footer">
+        <p>Footer</p>
+    </div>
+{% endblock %}
 
 </html>

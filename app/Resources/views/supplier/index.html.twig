@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Isimporter</th>
+                <th>Parts</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
                 <td><a href="{{ path('supplier_show', { 'id': supplier.id }) }}">{{ supplier.id }}</a></td>
                 <td>{{ supplier.name }}</td>
                 <td>{% if supplier.isImporter %}Yes{% else %}No{% endif %}</td>
+                <td>{{ supplier.parts|join (',,,') }}</td>
                 <td>
                     <ul>
                         <li>

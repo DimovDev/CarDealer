@@ -31,6 +31,30 @@ class SupplierController extends Controller
             'suppliers' => $suppliers,
         ));
     }
+	/**
+	 * Lists all supplier entities.
+	 *
+	 * @Route("/sort", name="supplier_index")
+	 * @Method("GET")
+	 */
+	public function findByCriteria(): \Symfony\Component\HttpFoundation\Response
+	{
+
+		$em = $this->getDoctrine()->getManager();
+
+		$suppliers = $em->getRepository('AppBundle:Supplier')
+			->sortCartByMake();
+
+		return $this->render('supplier/sort.twig',array(
+			'suppliers' => $suppliers,
+		));
+	}
+
+
+
+
+
+
 
 	/**
 	 * Creates a new supplier entity.

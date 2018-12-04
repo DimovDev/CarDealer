@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Supplier;
+
 /**
  * SupplierRepository
  *
@@ -10,4 +12,30 @@ namespace AppBundle\Repository;
  */
 class SupplierRepository extends \Doctrine\ORM\EntityRepository
 {
+	/**
+ * @param string $criteria
+ * @return array
+ */
+	public function sortSupplierByAbroad(string $criteria): array
+	{
+		$qb = $this->createQueryBuilder('c');
+//		if ($criteria === 'LOCAL') {
+		$qb->where('c.isImporter=:Locale');
+
+//		}
+//		else {
+//			$qb->where('c.isImporter=:Importer');
+//		}
+		$qb->select('c');
+
+
+
+		return $qb
+			->getQuery()
+			->getResult();
+
+
+
+
+	}
 }
