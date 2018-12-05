@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Query\Expr;
+
 /**
  * CarRepository
  *
@@ -14,10 +16,10 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
 	 *
 	 * @return array
 	 */
-	public function sortCartByMake(): array
+	public function sortCarByMake(): array
 	{
 		$qb = $this->createQueryBuilder('c');
-		$qb->orderBy('c.model', 'ASC');
+		$qb->orderBy('c.make', 'ASC');
 		$qb->select('c')
 			->addOrderBy('c.travelledDistance', 'DESC');
 		return $qb
@@ -25,5 +27,13 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
 			->getResult();
 
 
+	}
+	public function getAllCarsAndParts(): array
+	{
+		// demo Query
+		return $this->getEntityManager()->createQuery(
+			'SELECT c,p FROM AppBundle:Car c JOIN c.parts p
+            ORDER BY c.make ASC, c.model ASC, c.travelledDistance ASC')
+			->getResult();
 	}
 }

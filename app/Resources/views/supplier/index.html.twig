@@ -3,6 +3,9 @@
 {% block body %}
     <h1>Suppliers list</h1>
 
+    <a href="{{ path('supplier_sort') }}">
+        Go to Supplier sort
+    </a>
     <table border="1">
         <thead>
             <tr>
@@ -19,7 +22,7 @@
                 <td><a href="{{ path('supplier_show', { 'id': supplier.id }) }}">{{ supplier.id }}</a></td>
                 <td>{{ supplier.name }}</td>
                 <td>{% if supplier.isImporter %}Yes{% else %}No{% endif %}</td>
-                <td>{{ supplier.parts|join (',,,') }}</td>
+                <td>{{ supplier.parts|length }}</td>
                 <td>
                     <ul>
                         <li>

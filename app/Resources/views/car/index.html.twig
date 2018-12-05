@@ -5,6 +5,9 @@
     <h1>Cars list</h1>
     <a href="{{ path('car_sort') }}">
         Go to Car sorted by Make
+        <br>
+    </a>  <a href="{{ path('car_sort_with_part') }}">
+        Go to Car with part
     </a>
     <table>
         <thead >
@@ -14,6 +17,7 @@
                 <th>Model</th>
                 <th>Travelleddistance</th>
                 <th>Parts</th>
+                <th>Parts Count</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,6 +31,7 @@
                 <td>{{ car.model }}</td>
                 <td>{{ car.travelledDistance }}</td>
                 <td>{{ car.parts|join (',,,') }}</td>
+                <td>{{ car.parts|length }}</td>
 
                 <td>
                     <ul>

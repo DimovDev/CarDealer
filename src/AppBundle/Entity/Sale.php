@@ -112,8 +112,8 @@ class Sale
     }
 	public function __toString()
 	{
-		$name = $this->discount;
-//		$importer = $this->car;
-		return "$name ";
+		$name = $this->car;
+		$customer = $this->customer;
+		return "$name $customer";
 	}
 }

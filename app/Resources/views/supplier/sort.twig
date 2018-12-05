@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+
 
 
     {% block body %}
-        <h1>Suppliers list</h1>
+        <form method="post">
+            <input type="hidden" name="orderByAbroad" value="{{ orderByAbroad }}">
+            <button type="submit" class="btn btn-secondary">Toggle orderByAbroad</button>
+        </form>
+        <br>
+        <h1>Suppliers list sorted by abroad</h1>
 
         <table border="1">
             <thead>
@@ -45,5 +50,5 @@
         </ul>
     {% endblock %}
 
-{% endblock %}
+
 

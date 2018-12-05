@@ -57,7 +57,7 @@ class CarController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		$cars = $em->getRepository(Car::class)->
-		sortCartByMake();
+		sortCarByMake();
 
 		/**
 		 * @ var $paginator\Knp\Component\Pager\Paginator
@@ -73,6 +73,35 @@ class CarController extends Controller
 		return $this->render('car/sort.html.twig', array(
 			'cars' => $result));
 	}
+	/**
+	 * Lists all car entities sorted by criteria.
+	 *
+	 * @Route("/sort_part", name="car_sort_with_part",methods={"GET"})
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getAllCarsAndParts(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$cars = $em->getRepository(Car::class)->
+		getAllCarsAndParts();
+
+		/**
+		 * @ var $paginator\Knp\Component\Pager\Paginator
+		 */
+		$paginator = $this->get('knp_paginator');
+
+		$result = $paginator->paginate(
+			$cars,
+			$request->query->getInt('page', 1),
+			$request->query->getInt('limit', 10)
+		);
+
+		return $this->render('car/sort_part.html.twig', array(
+			'cars' => $result));
+	}
+
 
 	/**
 	 * Creates a new car entity.

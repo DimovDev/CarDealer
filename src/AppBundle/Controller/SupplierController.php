@@ -32,24 +32,29 @@ class SupplierController extends Controller
         ));
     }
 	/**
-	 * Lists all supplier entities.
+	 * Lists all supplier entities order by abroad.
 	 *
-	 * @Route("/sort", name="supplier_index")
-	 * @Method("GET")
+	 * @Route("/sort", name="supplier_sort")
+	 * @Method({"GET","POST"})
 	 */
-	public function findByCriteria(): \Symfony\Component\HttpFoundation\Response
+	public function findByCriteria(Request $request): \Symfony\Component\HttpFoundation\Response
 	{
-
+		$orderByAbroad=$request->get('orderByAbroad') ?? 'True';
+		$orderByAbroad='True'===$orderByAbroad ? 'False' : 'True';
 		$em = $this->getDoctrine()->getManager();
 
 		$suppliers = $em->getRepository('AppBundle:Supplier')
-			->sortCartByMake();
+			->sortSupplierByAbroad($orderByAbroad);
 
 		return $this->render('supplier/sort.twig',array(
-			'suppliers' => $suppliers,
+			'suppliers' => $suppliers,'orderByAbroad'=>$orderByAbroad
 		));
 	}
-
+//$ageOrder = $request->get('ageOrder') ?? 'ASC';  // get the current ageOrder
+//$ageOrder = 'ASC' === $ageOrder ? 'DESC' : 'ASC';    // toggle it
+//$em = $this->getDoctrine()->getManager();
+//
+//$customers = $em->getRepository('AppBundle:Customer')
 
 
 
@@ -130,13 +135,16 @@ class SupplierController extends Controller
         ));
     }
 
-    /**
-     * Deletes a supplier entity.
-     *
-     * @Route("/{id}", name="supplier_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Supplier $supplier)
+	/**
+	 * Deletes a supplier entity.
+	 *
+	 * @Route("/{id}", name="supplier_delete")
+	 * @Method("DELETE")
+	 * @param Request $request
+	 * @param Supplier $supplier
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 */
+    public function deleteAction(Request $request, Supplier $supplier): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $form = $this->createDeleteForm($supplier);
         $form->handleRequest($request);
@@ -150,13 +158,14 @@ class SupplierController extends Controller
         return $this->redirectToRoute('supplier_index');
     }
 
-    /**
-     * Creates a form to delete a supplier entity.
-     *
-     * @param Supplier $supplier The supplier entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
+	/**
+	 * Creates a form to delete a supplier entity.
+	 *
+	 *
+	 *
+	 * @param Supplier $supplier
+	 * @return \Symfony\Component\Form\Form The form
+	 */
     private function createDeleteForm(Supplier $supplier): \Symfony\Component\Form\Form
     {
         return $this->createFormBuilder()
